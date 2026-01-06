@@ -166,7 +166,7 @@ function attemptPlay() {
             // Remove listeners once played (UI updated by event)
             cleanupAutoPlay();
         }).catch(e => {
-            console.log("Auto-play prevented (waiting for interaction)");
+            // Autoplay prevented, waiting for interaction
         });
     }
 }
@@ -178,6 +178,9 @@ function cleanupAutoPlay() {
 }
 
 // Try immediately on load (often blocked, but worth a try)
+if (bgMusic) {
+    bgMusic.addEventListener('canplaythrough', attemptPlay, { once: true });
+}
 setTimeout(attemptPlay, 3000);
 
 // Try on any user interaction
