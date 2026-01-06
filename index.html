@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đám Cưới Cảnh Thành & Đặng Loan | Wedding Invitation</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Nunito:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wedding-pink': '#fcd5ce',
+                        'wedding-red': '#e63946',
+                        'wedding-gold': '#d4a373',
+                        'wedding-bg': '#fffbfb',
+                    },
+                    fontFamily: {
+                        'script': ['"Dancing Script"', 'cursive'],
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Nunito"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-smooth { scroll-behavior: smooth; }
+        /* Cập nhật overlay thành gradient từ dưới lên: Tối ở dưới để rõ chữ, trong suốt ở trên để rõ mặt */
+        .hero-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+        }
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #fcd5ce;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-wedding-bg antialiased selection:bg-wedding-pink selection:text-white">
+
+    <!-- Navigation đã được xóa theo yêu cầu -->
+
+    <!-- Hero Section -->
+    <!-- Chuyển bg-center thành bg-top để ưu tiên hiển thị phần đầu (mặt) của ảnh -->
+    <!-- Chuyển items-center thành items-end và thêm padding-bottom (pb-20) để đẩy chữ xuống dưới, không che mặt -->
+    <header class="relative h-screen flex items-end justify-center bg-cover bg-top pb-20 md:pb-32" style="background-image: url('https://cdn.biihappy.com/ziiweb/website/695a03d76a0b5e17c20dcfcb/6e37bfe35af392b2a87fba34f46e9e5e.jpeg');">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-10 text-center text-white px-4 animate-fade-in-up w-full">
+            <h1 class="font-script text-5xl sm:text-6xl md:text-8xl mb-4 md:mb-6 drop-shadow-lg">Cảnh Thành & Đặng Loan</h1>
+            <div class="flex items-center justify-center space-x-4 font-serif text-lg md:text-2xl drop-shadow-md">
+                <span>07</span>
+                <span class="w-2 h-2 bg-white rounded-full"></span>
+                <span>02</span>
+                <span class="w-2 h-2 bg-white rounded-full"></span>
+                <span>2026</span>
+            </div>
+            <p class="mt-6 md:mt-8 italic text-lg drop-shadow-md">"We’re Getting Married!"</p>
+            <div class="mt-8 md:mt-12">
+                <i class="fas fa-chevron-down text-3xl animate-bounce"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Couple Section -->
+    <section id="couple" class="py-12 md:py-20 container mx-auto px-4">
+        <div class="text-center mb-10 md:mb-16">
+            <h2 class="font-script text-4xl md:text-5xl text-wedding-red mb-4">Cô Dâu & Chú Rể</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">Tình yêu là sự đồng điệu lạ kỳ của hai trái tim, như hòa chung một nhịp, là chia sẻ, là gắn kết, là xem ai đó như cả thế giới, là muốn bên ai đó một đời.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12">
+            <!-- Groom -->
+            <div class="text-center w-full md:w-1/3 group">
+                <!-- Chuyển từ hình tròn (rounded-full) sang hình chữ nhật bo góc (rounded-2xl) để thấy hết ảnh -->
+                <!-- Bỏ w-64 h-64 cố định, để h-auto để ảnh tự giãn theo tỷ lệ thật -->
+                <div class="relative w-full max-w-xs mx-auto mb-6 rounded-2xl overflow-hidden border-4 border-wedding-pink shadow-xl transition transform group-hover:scale-105">
+                    <img src="https://cdn.biihappy.com/ziiweb/website/695a03d76a0b5e17c20dcfcb/6e37bfe35af392b2a87fba34f46e9e5e.jpeg" alt="Chú rể Cảnh Thành" class="w-full h-auto object-contain">
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-gray-800">Cảnh Thành</h3>
+                <p class="text-wedding-red font-bold mb-2">Chú Rể</p>
+                <p class="text-gray-600 px-4">Anh tự nhận thấy mình là một người hiền lành và ít lời. Anh luôn đặt tình cảm và yêu thương gia đình lên hàng đầu. Gia đình đối với anh là một trụ cột vững chắc nhất.</p>
+            </div>
+
+            <!-- Heart Icon -->
+            <div class="text-wedding-red text-4xl animate-pulse self-center">
+                <i class="fas fa-heart"></i>
+            </div>
+
+            <!-- Bride -->
+            <div class="text-center w-full md:w-1/3 group">
+                <!-- Tương tự cho cô dâu -->
+                <div class="relative w-full max-w-xs mx-auto mb-6 rounded-2xl overflow-hidden border-4 border-wedding-pink shadow-xl transition transform group-hover:scale-105">
+                    <img src="https://cdn.biihappy.com/ziiweb/website/695a03d76a0b5e17c20dcfcb/6f079e71f3add52423e737be3440833d.jpeg" alt="Cô dâu Đặng Loan" class="w-full h-auto object-contain">
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-gray-800">Đặng Loan</h3>
+                <p class="text-wedding-red font-bold mb-2">Cô Dâu</p>
+                <p class="text-gray-600 px-4">Em là cô gái với nhiều mộng mơ. Là một người hay cười nhưng lại sống nội tâm, thích đọc sách, trồng cây và yêu thiên nhiên. Em ước mơ có 1 mái ấm hạnh phúc.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events & Map Section -->
+    <section id="events" class="py-12 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="font-script text-4xl md:text-5xl text-center text-wedding-red mb-10 md:mb-16 section-title">Sự Kiện Cưới</h2>
+            
+            <!-- Event 1: Nhà Gái -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto flex flex-col md:flex-row mb-12">
+                <!-- Info -->
+                <div class="p-6 md:p-10 md:w-1/2 flex flex-col justify-center text-center md:text-left">
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2 text-gray-800">TIỆC CƯỚI NHÀ NỮ</h3>
+                    <p class="text-wedding-gold font-bold uppercase tracking-widest mb-6 text-sm md:text-base">Thứ Sáu, 06/02/2026</p>
+                    
+                    <div class="space-y-4 text-gray-600 text-sm md:text-base">
+                        <div class="flex items-center md:justify-start justify-center gap-3">
+                            <i class="far fa-clock text-wedding-red text-xl"></i>
+                            <span>11:00 AM</span>
+                        </div>
+                        <div class="flex items-start md:justify-start justify-center gap-3">
+                            <i class="fas fa-map-marker-alt text-wedding-red text-xl mt-1"></i>
+                            <span>
+                                <strong>Tư gia Nhà Nữ</strong><br>
+                                Xóm 5, Xã Hưng Lĩnh, Huyện Hưng Nguyên, Tỉnh Nghệ An
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map (Bride's location) -->
+                <div class="md:w-1/2 h-64 md:h-auto bg-gray-200 relative">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=xóm+5+xã+Hưng+Lĩnh+huyện+Hưng+Nguyên+tỉnh+Nghệ+An&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Event 2: Nhà Trai -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto flex flex-col md:flex-row-reverse">
+                <!-- Info -->
+                <div class="p-6 md:p-10 md:w-1/2 flex flex-col justify-center text-center md:text-right">
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2 text-gray-800">TIỆC CƯỚI NHÀ NAM</h3>
+                    <p class="text-wedding-gold font-bold uppercase tracking-widest mb-6 text-sm md:text-base">Thứ Bảy, 07/02/2026</p>
+                    
+                    <div class="space-y-4 text-gray-600 text-sm md:text-base">
+                        <div class="flex items-center md:justify-end justify-center gap-3">
+                            <span>11:00 AM</span>
+                            <i class="far fa-clock text-wedding-red text-xl"></i>
+                        </div>
+                        <div class="flex items-start md:justify-end justify-center gap-3">
+                            <span class="text-right">
+                                <strong>Tư gia Nhà Nam</strong><br>
+                                Xóm 2, Xã Yên Thành, Tỉnh Nghệ An
+                            </span>
+                            <i class="fas fa-map-marker-alt text-wedding-red text-xl mt-1"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map (Groom's location) -->
+                <div class="md:w-1/2 h-64 md:h-auto bg-gray-200 relative">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=19.0126532,105.445633&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+             <div class="text-center mt-12">
+                <a href="#rsvp" class="inline-block bg-wedding-red text-white py-3 px-8 rounded-full shadow hover:bg-red-700 transition">
+                    Xác nhận tham dự
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section (Multi-language) -->
+    <section id="rsvp" class="py-12 md:py-20 relative bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc330e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 bg-white/80"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-12 border-t-8 border-wedding-red">
+                
+                <!-- Language Switcher -->
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button onclick="setLanguage('vi')" class="lang-btn active px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold" data-lang="vi">TIẾNG VIỆT</button>
+                    <button onclick="setLanguage('en')" class="lang-btn px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold" data-lang="en">ENGLISH</button>
+                    <button onclick="setLanguage('zh')" class="lang-btn px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold" data-lang="zh">中文</button>
+                </div>
+
+                <div class="text-center mb-8">
+                    <h2 class="font-script text-4xl md:text-5xl text-wedding-red mb-2" id="form-title">R.S.V.P</h2>
+                    <p class="text-gray-600" id="form-subtitle">Vui lòng xác nhận sự hiện diện của bạn trước ngày 01/02/2026</p>
+                </div>
+
+                <form id="wedding-form" class="space-y-6" onsubmit="submitForm(event)">
+                    <!-- Name -->
+                    <div>
+                        <label for="name" class="block text-sm font-bold text-gray-700 mb-1" id="label-name">Tên của bạn</label>
+                        <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition" placeholder="Nhập tên của bạn...">
+                    </div>
+
+                    <!-- Phone -->
+                    <div>
+                        <label for="phone" class="block text-sm font-bold text-gray-700 mb-1" id="label-phone">Số điện thoại</label>
+                        <input type="tel" id="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition" placeholder="0912...">
+                    </div>
+
+                    <!-- Guests Count -->
+                    <div>
+                        <label for="guests" class="block text-sm font-bold text-gray-700 mb-1" id="label-guests">Số lượng người đi cùng</label>
+                        <select id="guests" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition bg-white">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4+</option>
+                        </select>
+                    </div>
+
+                    <!-- Attendance -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2" id="label-attending">Bạn sẽ tham dự chứ?</label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="attendance" value="yes" checked class="text-wedding-red focus:ring-wedding-red w-5 h-5">
+                                <span id="opt-yes">Có, chắc chắn rồi!</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="attendance" value="no" class="text-wedding-red focus:ring-wedding-red w-5 h-5">
+                                <span id="opt-no">Rất tiếc, mình bận mất rồi</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div>
+                        <label for="message" class="block text-sm font-bold text-gray-700 mb-1" id="label-message">Lời nhắn gửi</label>
+                        <textarea id="message" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition" placeholder="Gửi lời chúc đến Cảnh Thành & Đặng Loan..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-wedding-red text-white font-bold py-4 rounded-lg hover:bg-red-700 transition transform hover:-translate-y-1 shadow-lg" id="btn-submit">
+                        GỬI XÁC NHẬN
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 text-center">
+        <h2 class="font-script text-4xl mb-4">Cảnh Thành & Đặng Loan</h2>
+        <p class="font-serif italic text-gray-400 mb-8">Thank you for being part of our big day!</p>
+        <div class="text-xs text-gray-600">
+            © 2026 Designed for Thanh & Loan Wedding
+        </div>
+    </footer>
+
+    <!-- Notification Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm text-center mx-4">
+            <div class="text-wedding-red text-5xl mb-4"><i class="far fa-check-circle"></i></div>
+            <h3 class="text-2xl font-bold mb-2">Thank You!</h3>
+            <p class="text-gray-600 mb-6">Thông tin của bạn đã được gửi thành công.</p>
+            <button onclick="document.getElementById('modal').classList.add('hidden')" class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Language Data
+        const translations = {
+            vi: {
+                title: "Xác Nhận Tham Dự",
+                subtitle: "Vui lòng xác nhận sự hiện diện của bạn trước ngày 01/02/2026",
+                name: "Tên của bạn",
+                namePh: "Nhập tên của bạn...",
+                phone: "Số điện thoại",
+                guests: "Số lượng người đi cùng",
+                attending: "Bạn sẽ tham dự chứ?",
+                yes: "Có, chắc chắn rồi!",
+                no: "Rất tiếc, mình bận mất rồi",
+                message: "Lời nhắn gửi",
+                messagePh: "Gửi lời chúc đến Thành & Loan...",
+                submit: "GỬI XÁC NHẬN"
+            },
+            en: {
+                title: "RSVP",
+                subtitle: "Please confirm your attendance before February 1st, 2026",
+                name: "Your Name",
+                namePh: "Enter your name...",
+                phone: "Phone Number",
+                guests: "Number of Guests",
+                attending: "Will you attend?",
+                yes: "Yes, I will be there!",
+                no: "Sorry, I can't come",
+                message: "Wishes",
+                messagePh: "Best wishes for the couple...",
+                submit: "SEND RSVP"
+            },
+            zh: {
+                title: "出席确认",
+                subtitle: "请在2026年2月1日前确认您的出席",
+                name: "您的姓名",
+                namePh: "输入您的姓名...",
+                phone: "电话号码",
+                guests: "随行人数",
+                attending: "您会参加吗？",
+                yes: "是的，我会参加！",
+                no: "抱歉，我无法参加",
+                message: "祝福语",
+                messagePh: "给新人的祝福...",
+                submit: "发送确认"
+            }
+        };
+
+        function setLanguage(lang) {
+            // Update Text
+            const t = translations[lang];
+            document.getElementById('form-title').textContent = t.title;
+            document.getElementById('form-subtitle').textContent = t.subtitle;
+            document.getElementById('label-name').textContent = t.name;
+            document.getElementById('name').placeholder = t.namePh;
+            document.getElementById('label-phone').textContent = t.phone;
+            document.getElementById('label-guests').textContent = t.guests;
+            document.getElementById('label-attending').textContent = t.attending;
+            document.getElementById('opt-yes').textContent = t.yes;
+            document.getElementById('opt-no').textContent = t.no;
+            document.getElementById('label-message').textContent = t.message;
+            document.getElementById('message').placeholder = t.messagePh;
+            document.getElementById('btn-submit').textContent = t.submit;
+
+            // Update Button Styles
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('bg-wedding-red', 'text-white', 'border-transparent');
+                    btn.classList.remove('text-gray-700', 'border-gray-300');
+                } else {
+                    btn.classList.remove('bg-wedding-red', 'text-white', 'border-transparent');
+                    btn.classList.add('text-gray-700', 'border-gray-300');
+                }
+            });
+        }
+
+        // Initialize default language styling
+        setLanguage('vi');
+
+        function submitForm(e) {
+            e.preventDefault();
+            // Here you would typically send data to a backend (Google Sheets, Email, etc.)
+            // For now, we just show a success modal
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
