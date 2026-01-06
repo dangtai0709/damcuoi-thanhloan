@@ -1,0 +1,82 @@
+.scroll-smooth {
+    scroll-behavior: smooth;
+}
+
+/* Cập nhật overlay thành gradient từ dưới lên: Tối ở dưới để rõ chữ, trong suốt ở trên để rõ mặt */
+.hero-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #fcd5ce;
+    margin: 10px auto;
+}
+
+/* Falling Hearts Animation */
+.heart-fall {
+    position: fixed;
+    top: -10vh;
+    color: #e63946;
+    opacity: 0;
+    z-index: 0;
+    /* Behind content if possible, or low z-index */
+    animation-name: fall;
+    animation-timing-function: linear;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Music Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 50;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #e63946;
+    color: #e63946;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    background-color: #fff;
+}
+
+.music-btn.playing {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

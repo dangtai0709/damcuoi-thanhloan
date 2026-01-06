@@ -33,90 +33,7 @@
             }
         }
     </script>
-    <style>
-        .scroll-smooth {
-            scroll-behavior: smooth;
-        }
-
-        /* Cập nhật overlay thành gradient từ dưới lên: Tối ở dưới để rõ chữ, trong suốt ở trên để rõ mặt */
-        .hero-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
-        }
-
-        .section-title::after {
-            content: "";
-            display: block;
-            width: 80px;
-            height: 3px;
-            background-color: #fcd5ce;
-            margin: 10px auto;
-        }
-
-        /* Falling Hearts Animation */
-        .heart-fall {
-            position: fixed;
-            top: -10vh;
-            color: #e63946;
-            opacity: 0;
-            z-index: 0;
-            /* Behind content if possible, or low z-index */
-            animation-name: fall;
-            animation-timing-function: linear;
-            pointer-events: none;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Music Button */
-        .music-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 50;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 2px solid #e63946;
-            color: #e63946;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .music-btn:hover {
-            transform: scale(1.1);
-            background-color: #fff;
-        }
-
-        .music-btn.playing {
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="font-sans text-gray-700 bg-wedding-bg antialiased selection:bg-wedding-pink selection:text-white">
@@ -125,7 +42,7 @@
 
     <!-- Music Player -->
     <!-- Music Player -->
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop preload="auto">
         <source src="nhaccuoi.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -311,12 +228,13 @@
                         01/02/2026</p>
                 </div>
 
-                <form id="wedding-form" class="space-y-6" onsubmit="submitForm(event)">
+
+                <form id="wedding-form" class="space-y-6">
                     <!-- Name -->
                     <div>
                         <label for="name" class="block text-sm font-bold text-gray-700 mb-1" id="label-name">Tên của
                             bạn</label>
-                        <input type="text" id="name" required
+                        <input type="text" id="name" name="name" required
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition"
                             placeholder="Nhập tên của bạn...">
                     </div>
@@ -325,7 +243,7 @@
                     <div>
                         <label for="phone" class="block text-sm font-bold text-gray-700 mb-1" id="label-phone">Số điện
                             thoại</label>
-                        <input type="tel" id="phone" required
+                        <input type="tel" id="phone" name="phone" required
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition"
                             placeholder="0912...">
                     </div>
@@ -334,7 +252,7 @@
                     <div>
                         <label for="guests" class="block text-sm font-bold text-gray-700 mb-1" id="label-guests">Số
                             lượng người đi cùng</label>
-                        <select id="guests"
+                        <select id="guests" name="guests"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition bg-white">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -349,12 +267,12 @@
                             chứ?</label>
                         <div class="flex gap-4">
                             <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="attendance" value="yes" checked
+                                <input type="radio" name="attending" value="Yes" checked
                                     class="text-wedding-red focus:ring-wedding-red w-5 h-5">
                                 <span id="opt-yes">Có, chắc chắn rồi!</span>
                             </label>
                             <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="attendance" value="no"
+                                <input type="radio" name="attending" value="No"
                                     class="text-wedding-red focus:ring-wedding-red w-5 h-5">
                                 <span id="opt-no">Rất tiếc, mình bận mất rồi</span>
                             </label>
@@ -363,18 +281,20 @@
 
                     <!-- Message -->
                     <div>
-                        <label for="message" class="block text-sm font-bold text-gray-700 mb-1" id="label-message">Lời
+                        <label for="wishes" class="block text-sm font-bold text-gray-700 mb-1" id="label-wishes">Lời
                             nhắn gửi</label>
-                        <textarea id="message" rows="3"
+                        <textarea id="wishes" name="wishes" rows="4"
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition"
                             placeholder="Gửi lời chúc đến Cảnh Thành & Đặng Loan..."></textarea>
                     </div>
 
-                    <button type="submit"
-                        class="w-full bg-wedding-red text-white font-bold py-4 rounded-lg hover:bg-red-700 transition transform hover:-translate-y-1 shadow-lg"
-                        id="btn-submit">
-                        GỬI XÁC NHẬN
-                    </button>
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-wedding-red text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-600 transform hover:scale-105 transition duration-300 w-full md:w-auto"
+                            id="btn-submit">
+                            GỬI XÁC NHẬN
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -390,208 +310,33 @@
     </footer>
 
     <!-- Notification Modal -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm text-center mx-4">
-            <div class="text-wedding-red text-5xl mb-4"><i class="far fa-check-circle"></i></div>
-            <h3 class="text-2xl font-bold mb-2">Thank You!</h3>
-            <p class="text-gray-600 mb-6">Thông tin của bạn đã được gửi thành công.</p>
-            <button onclick="document.getElementById('modal').classList.add('hidden')"
-                class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700">Đóng</button>
+    <!-- Thank You Modal -->
+    <!-- Thank You Modal -->
+    <div id="thank-you-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300">
+        <div
+            class="bg-white rounded-2xl p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-100 transition-transform duration-300 relative text-center">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="mb-6">
+                <i class="fas fa-heart text-5xl text-wedding-red animate-pulse"></i>
+            </div>
+            <h3 id="modal-title" class="text-2xl font-dancing text-wedding-red mb-4">Cảm ơn bạn!</h3>
+            <div class="space-y-2 text-gray-700">
+                <p id="modal-message" class="font-medium">Cảm ơn lời chúc của bạn!</p>
+            </div>
+            <button id="modal-close" onclick="closeModal()"
+                class="mt-8 bg-wedding-red text-white py-2 px-6 rounded-full hover:bg-red-600 transition w-full">
+                Đóng
+            </button>
         </div>
     </div>
 
     <!-- Scripts -->
-    <script>
-        // Language Data
-        const translations = {
-            vi: {
-                title: "Xác Nhận Tham Dự",
-                subtitle: "Vui lòng xác nhận sự hiện diện của bạn trước ngày 01/02/2026",
-                name: "Tên của bạn",
-                namePh: "Nhập tên của bạn...",
-                phone: "Số điện thoại",
-                guests: "Số lượng người đi cùng",
-                attending: "Bạn sẽ tham dự chứ?",
-                yes: "Có, chắc chắn rồi!",
-                no: "Rất tiếc, mình bận mất rồi",
-                message: "Lời nhắn gửi",
-                messagePh: "Gửi lời chúc đến Thành & Loan...",
-                submit: "GỬI XÁC NHẬN"
-            },
-            en: {
-                title: "RSVP",
-                subtitle: "Please confirm your attendance before February 1st, 2026",
-                name: "Your Name",
-                namePh: "Enter your name...",
-                phone: "Phone Number",
-                guests: "Number of Guests",
-                attending: "Will you attend?",
-                yes: "Yes, I will be there!",
-                no: "Sorry, I can't come",
-                message: "Wishes",
-                messagePh: "Best wishes for the couple...",
-                submit: "SEND RSVP"
-            },
-            zh: {
-                title: "出席确认",
-                subtitle: "请在2026年2月1日前确认您的出席",
-                name: "您的姓名",
-                namePh: "输入您的姓名...",
-                phone: "电话号码",
-                guests: "随行人数",
-                attending: "您会参加吗？",
-                yes: "是的，我会参加！",
-                no: "抱歉，我无法参加",
-                message: "祝福语",
-                messagePh: "给新人的祝福...",
-                submit: "发送确认"
-            }
-        };
-
-        function setLanguage(lang) {
-            // Update Text
-            const t = translations[lang];
-            document.getElementById('form-title').textContent = t.title;
-            document.getElementById('form-subtitle').textContent = t.subtitle;
-            document.getElementById('label-name').textContent = t.name;
-            document.getElementById('name').placeholder = t.namePh;
-            document.getElementById('label-phone').textContent = t.phone;
-            document.getElementById('label-guests').textContent = t.guests;
-            document.getElementById('label-attending').textContent = t.attending;
-            document.getElementById('opt-yes').textContent = t.yes;
-            document.getElementById('opt-no').textContent = t.no;
-            document.getElementById('label-message').textContent = t.message;
-            document.getElementById('message').placeholder = t.messagePh;
-            document.getElementById('btn-submit').textContent = t.submit;
-
-            // Update Button Styles
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.dataset.lang === lang) {
-                    btn.classList.add('bg-wedding-red', 'text-white', 'border-transparent');
-                    btn.classList.remove('text-gray-700', 'border-gray-300');
-                } else {
-                    btn.classList.remove('bg-wedding-red', 'text-white', 'border-transparent');
-                    btn.classList.add('text-gray-700', 'border-gray-300');
-                }
-            });
-        }
-
-        // Initialize default language styling
-        setLanguage('vi');
-
-        function submitForm(e) {
-            e.preventDefault();
-            // Here you would typically send data to a backend (Google Sheets, Email, etc.)
-            // For now, we just show a success modal
-            document.getElementById('modal').classList.remove('hidden');
-            document.getElementById('modal').classList.add('flex');
-            e.target.reset();
-        }
-
-        // Music Control
-        const audio = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-toggle');
-        const musicIcon = musicBtn.querySelector('i');
-        let isPlaying = false;
-
-        function updateMusicUI(playing) {
-            if (playing) {
-                musicBtn.classList.add('playing');
-                musicIcon.classList.remove('fa-music');
-                musicIcon.classList.add('fa-compact-disc');
-            } else {
-                musicBtn.classList.remove('playing');
-                musicIcon.classList.remove('fa-compact-disc');
-                musicIcon.classList.add('fa-music');
-            }
-        }
-
-        musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-            } else {
-                audio.play().then(() => {
-                    isPlaying = true;
-                }).catch(err => {
-                    console.log("Audio play failed: ", err);
-                    alert("Không thể phát nhạc tự động. Vui lòng tương tác với trang web trước.");
-                });
-            }
-            updateMusicUI(isPlaying);
-        });
-
-        // Check if autoplay worked
-        audio.addEventListener('play', () => {
-            isPlaying = true;
-            updateMusicUI(true);
-        });
-        audio.addEventListener('pause', () => {
-            isPlaying = false;
-            updateMusicUI(false);
-        });
-
-        // Try auto-play logic (3s delay or scroll)
-        let hasAutoplayed = false;
-
-        function attemptPlay() {
-            if (hasAutoplayed || isPlaying) return;
-
-            audio.play().then(() => {
-                hasAutoplayed = true;
-                // UI update is handled by the 'play' event listener
-            }).catch(err => {
-                console.log("Autoplay prevented:", err);
-                // If 3s timer failed (browser policy), scroll might still work later
-            });
-        }
-
-        // 1. Play after 3 seconds
-        setTimeout(attemptPlay, 3000);
-
-        // 2. Play on scroll (user interaction usually allows audio)
-        window.addEventListener('scroll', () => {
-            attemptPlay();
-        }, { once: true });
-
-        // 3. Keep existing click fallback
-        document.body.addEventListener('click', () => {
-            attemptPlay();
-        }, { once: true });
-
-
-        // Falling Hearts Effect
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart-fall');
-            heart.innerHTML = '<i class="fas fa-heart"></i>';
-
-            // Random properties
-            const startLeft = Math.random() * 100; // 0-100%
-            const duration = Math.random() * 3 + 4; // 4-7s
-            const size = Math.random() * 10 + 10; // 10-20px
-            const delay = Math.random() * 5; // 0-5s start delay
-
-            heart.style.left = startLeft + 'vw';
-            heart.style.animationDuration = duration + 's';
-            heart.style.fontSize = size + 'px';
-            heart.style.animationDelay = delay + 's';
-
-            // Randomize color slightly (optional, keeping red/pink theme)
-            const colors = ['#e63946', '#fcd5ce', '#ffcad4'];
-            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-            document.body.appendChild(heart);
-
-            // Cleanup
-            setTimeout(() => {
-                heart.remove();
-            }, (duration + delay) * 1000);
-        }
-
-        // Create hearts continuously
-        setInterval(createHeart, 300);
-    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({duration: 1000, once: true});</script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
