@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Nunito:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Nunito:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -31,11 +34,15 @@
         }
     </script>
     <style>
-        .scroll-smooth { scroll-behavior: smooth; }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+
         /* Cập nhật overlay thành gradient từ dưới lên: Tối ở dưới để rõ chữ, trong suốt ở trên để rõ mặt */
         .hero-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
         }
+
         .section-title::after {
             content: "";
             display: block;
@@ -44,19 +51,98 @@
             background-color: #fcd5ce;
             margin: 10px auto;
         }
+
+        /* Falling Hearts Animation */
+        .heart-fall {
+            position: fixed;
+            top: -10vh;
+            color: #e63946;
+            opacity: 0;
+            z-index: 0;
+            /* Behind content if possible, or low z-index */
+            animation-name: fall;
+            animation-timing-function: linear;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e63946;
+            color: #e63946;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            background-color: #fff;
+        }
+
+        .music-btn.playing {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body class="font-sans text-gray-700 bg-wedding-bg antialiased selection:bg-wedding-pink selection:text-white">
 
     <!-- Navigation đã được xóa theo yêu cầu -->
 
+    <!-- Music Player -->
+    <!-- Music Player -->
+    <audio id="bg-music" loop>
+        <source src="nhaccuoi.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="music-toggle" class="music-btn" title="Bật/Tắt nhạc">
+        <i class="fas fa-compact-disc"></i>
+    </button>
+
+
     <!-- Hero Section -->
     <!-- Chuyển bg-center thành bg-top để ưu tiên hiển thị phần đầu (mặt) của ảnh -->
     <!-- Chuyển items-center thành items-end và thêm padding-bottom (pb-20) để đẩy chữ xuống dưới, không che mặt -->
-    <header class="relative h-screen flex items-end justify-center bg-cover bg-top pb-20 md:pb-32" style="background-image: url('https://cdn.biihappy.com/ziiweb/website/695a03d76a0b5e17c20dcfcb/6e37bfe35af392b2a87fba34f46e9e5e.jpeg');">
+    <header class="relative h-screen flex items-end justify-center bg-cover bg-center pb-20 md:pb-32"
+        style="background-image: url('anhcuoi.png');">
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="relative z-10 text-center text-white px-4 animate-fade-in-up w-full">
-            <h1 class="font-script text-5xl sm:text-6xl md:text-8xl mb-4 md:mb-6 drop-shadow-lg">Cảnh Thành & Đặng Loan</h1>
+            <h1 class="font-script text-5xl sm:text-6xl md:text-8xl mb-4 md:mb-6 drop-shadow-lg">Cảnh Thành & Đặng Loan
+            </h1>
             <div class="flex items-center justify-center space-x-4 font-serif text-lg md:text-2xl drop-shadow-md">
                 <span>07</span>
                 <span class="w-2 h-2 bg-white rounded-full"></span>
@@ -75,20 +161,24 @@
     <section id="couple" class="py-12 md:py-20 container mx-auto px-4">
         <div class="text-center mb-10 md:mb-16">
             <h2 class="font-script text-4xl md:text-5xl text-wedding-red mb-4">Cô Dâu & Chú Rể</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">Tình yêu là sự đồng điệu lạ kỳ của hai trái tim, như hòa chung một nhịp, là chia sẻ, là gắn kết, là xem ai đó như cả thế giới, là muốn bên ai đó một đời.</p>
+            <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">Tình yêu là sự đồng điệu lạ kỳ của hai trái
+                tim, như hòa chung một nhịp, là chia sẻ, là gắn kết, là xem ai đó như cả thế giới, là muốn bên ai đó một
+                đời.</p>
         </div>
-        
+
         <div class="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12">
             <!-- Groom -->
             <div class="text-center w-full md:w-1/3 group">
                 <!-- Chuyển từ hình tròn (rounded-full) sang hình chữ nhật bo góc (rounded-2xl) để thấy hết ảnh -->
                 <!-- Bỏ w-64 h-64 cố định, để h-auto để ảnh tự giãn theo tỷ lệ thật -->
-                <div class="relative w-full max-w-xs mx-auto mb-6 rounded-2xl overflow-hidden border-4 border-wedding-pink shadow-xl transition transform group-hover:scale-105">
-                    <img src="https://cdn.biihappy.com/ziiweb/website/695a03d76a0b5e17c20dcfcb/6e37bfe35af392b2a87fba34f46e9e5e.jpeg" alt="Chú rể Cảnh Thành" class="w-full h-auto object-contain">
+                <div
+                    class="relative w-full max-w-xs mx-auto mb-6 rounded-2xl overflow-hidden border-4 border-wedding-pink shadow-xl transition transform group-hover:scale-105">
+                    <img src="groom.jpeg" alt="Chú rể Cảnh Thành" class="w-full h-auto object-contain">
                 </div>
                 <h3 class="font-serif text-2xl font-bold text-gray-800">Cảnh Thành</h3>
                 <p class="text-wedding-red font-bold mb-2">Chú Rể</p>
-                <p class="text-gray-600 px-4">Anh tự nhận thấy mình là một người hiền lành và ít lời. Anh luôn đặt tình cảm và yêu thương gia đình lên hàng đầu. Gia đình đối với anh là một trụ cột vững chắc nhất.</p>
+                <p class="text-gray-600 px-4">Anh tự nhận thấy mình là một người hiền lành và ít lời. Anh luôn đặt tình
+                    cảm và yêu thương gia đình lên hàng đầu. Gia đình đối với anh là một trụ cột vững chắc nhất.</p>
             </div>
 
             <!-- Heart Icon -->
@@ -99,12 +189,14 @@
             <!-- Bride -->
             <div class="text-center w-full md:w-1/3 group">
                 <!-- Tương tự cho cô dâu -->
-                <div class="relative w-full max-w-xs mx-auto mb-6 rounded-2xl overflow-hidden border-4 border-wedding-pink shadow-xl transition transform group-hover:scale-105">
-                    <img src="https://cdn.biihappy.com/ziiweb/website/695a03d76a0b5e17c20dcfcb/6f079e71f3add52423e737be3440833d.jpeg" alt="Cô dâu Đặng Loan" class="w-full h-auto object-contain">
+                <div
+                    class="relative w-full max-w-xs mx-auto mb-6 rounded-2xl overflow-hidden border-4 border-wedding-pink shadow-xl transition transform group-hover:scale-105">
+                    <img src="bride.jpeg" alt="Cô dâu Đặng Loan" class="w-full h-auto object-contain">
                 </div>
                 <h3 class="font-serif text-2xl font-bold text-gray-800">Đặng Loan</h3>
                 <p class="text-wedding-red font-bold mb-2">Cô Dâu</p>
-                <p class="text-gray-600 px-4">Em là cô gái với nhiều mộng mơ. Là một người hay cười nhưng lại sống nội tâm, thích đọc sách, trồng cây và yêu thiên nhiên. Em ước mơ có 1 mái ấm hạnh phúc.</p>
+                <p class="text-gray-600 px-4">Em là cô gái với nhiều mộng mơ. Là một người hay cười nhưng lại sống nội
+                    tâm, thích đọc sách, trồng cây và yêu thiên nhiên. Em ước mơ có 1 mái ấm hạnh phúc.</p>
             </div>
         </div>
     </section>
@@ -112,15 +204,18 @@
     <!-- Events & Map Section -->
     <section id="events" class="py-12 md:py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="font-script text-4xl md:text-5xl text-center text-wedding-red mb-10 md:mb-16 section-title">Sự Kiện Cưới</h2>
-            
+            <h2 class="font-script text-4xl md:text-5xl text-center text-wedding-red mb-10 md:mb-16 section-title">Sự
+                Kiện Cưới</h2>
+
             <!-- Event 1: Nhà Gái -->
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto flex flex-col md:flex-row mb-12">
+            <div
+                class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto flex flex-col md:flex-row mb-12">
                 <!-- Info -->
                 <div class="p-6 md:p-10 md:w-1/2 flex flex-col justify-center text-center md:text-left">
                     <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2 text-gray-800">TIỆC CƯỚI NHÀ NỮ</h3>
-                    <p class="text-wedding-gold font-bold uppercase tracking-widest mb-6 text-sm md:text-base">Thứ Sáu, 06/02/2026</p>
-                    
+                    <p class="text-wedding-gold font-bold uppercase tracking-widest mb-6 text-sm md:text-base">Thứ Sáu,
+                        06/02/2026</p>
+
                     <div class="space-y-4 text-gray-600 text-sm md:text-base">
                         <div class="flex items-center md:justify-start justify-center gap-3">
                             <i class="far fa-clock text-wedding-red text-xl"></i>
@@ -138,24 +233,22 @@
 
                 <!-- Map (Bride's location) -->
                 <div class="md:w-1/2 h-64 md:h-auto bg-gray-200 relative">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=xóm+5+xã+Hưng+Lĩnh+huyện+Hưng+Nguyên+tỉnh+Nghệ+An&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
+                    <iframe
+                        src="https://maps.google.com/maps?q=xóm+5+xã+Hưng+Lĩnh+huyện+Hưng+Nguyên+tỉnh+Nghệ+An&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                     </iframe>
                 </div>
             </div>
 
             <!-- Event 2: Nhà Trai -->
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto flex flex-col md:flex-row-reverse">
+            <div
+                class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto flex flex-col md:flex-row-reverse">
                 <!-- Info -->
                 <div class="p-6 md:p-10 md:w-1/2 flex flex-col justify-center text-center md:text-right">
                     <h3 class="font-serif text-2xl md:text-3xl font-bold mb-2 text-gray-800">TIỆC CƯỚI NHÀ NAM</h3>
-                    <p class="text-wedding-gold font-bold uppercase tracking-widest mb-6 text-sm md:text-base">Thứ Bảy, 07/02/2026</p>
-                    
+                    <p class="text-wedding-gold font-bold uppercase tracking-widest mb-6 text-sm md:text-base">Thứ Bảy,
+                        07/02/2026</p>
+
                     <div class="space-y-4 text-gray-600 text-sm md:text-base">
                         <div class="flex items-center md:justify-end justify-center gap-3">
                             <span>11:00 AM</span>
@@ -173,19 +266,20 @@
 
                 <!-- Map (Groom's location) -->
                 <div class="md:w-1/2 h-64 md:h-auto bg-gray-200 relative">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=19.0126532,105.445633&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
+                    <iframe
+                        src="https://maps.google.com/maps?q=19.0126532,105.445633&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                     </iframe>
+                    <a href="https://maps.app.goo.gl/BpZsQvZZquHmNUf88" target="_blank"
+                        class="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md text-sm font-bold text-wedding-red hover:bg-gray-50 transition">
+                        <i class="fas fa-map-marked-alt mr-2"></i>Xem bản đồ
+                    </a>
                 </div>
             </div>
 
-             <div class="text-center mt-12">
-                <a href="#rsvp" class="inline-block bg-wedding-red text-white py-3 px-8 rounded-full shadow hover:bg-red-700 transition">
+            <div class="text-center mt-12">
+                <a href="#rsvp"
+                    class="inline-block bg-wedding-red text-white py-3 px-8 rounded-full shadow hover:bg-red-700 transition">
                     Xác nhận tham dự
                 </a>
             </div>
@@ -193,40 +287,55 @@
     </section>
 
     <!-- RSVP Section (Multi-language) -->
-    <section id="rsvp" class="py-12 md:py-20 relative bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc330e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+    <section id="rsvp" class="py-12 md:py-20 relative bg-cover bg-center" style="background-image: url('rsvp-bg.jpg');">
         <div class="absolute inset-0 bg-white/80"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-12 border-t-8 border-wedding-red">
-                
+
                 <!-- Language Switcher -->
                 <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
-                    <button onclick="setLanguage('vi')" class="lang-btn active px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold" data-lang="vi">TIẾNG VIỆT</button>
-                    <button onclick="setLanguage('en')" class="lang-btn px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold" data-lang="en">ENGLISH</button>
-                    <button onclick="setLanguage('zh')" class="lang-btn px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold" data-lang="zh">中文</button>
+                    <button onclick="setLanguage('vi')"
+                        class="lang-btn active px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold"
+                        data-lang="vi">TIẾNG VIỆT</button>
+                    <button onclick="setLanguage('en')"
+                        class="lang-btn px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold"
+                        data-lang="en">ENGLISH</button>
+                    <button onclick="setLanguage('zh')"
+                        class="lang-btn px-3 py-1 rounded border border-gray-300 hover:bg-wedding-pink hover:text-white transition text-sm font-bold"
+                        data-lang="zh">中文</button>
                 </div>
 
                 <div class="text-center mb-8">
                     <h2 class="font-script text-4xl md:text-5xl text-wedding-red mb-2" id="form-title">R.S.V.P</h2>
-                    <p class="text-gray-600" id="form-subtitle">Vui lòng xác nhận sự hiện diện của bạn trước ngày 01/02/2026</p>
+                    <p class="text-gray-600" id="form-subtitle">Vui lòng xác nhận sự hiện diện của bạn trước ngày
+                        01/02/2026</p>
                 </div>
 
                 <form id="wedding-form" class="space-y-6" onsubmit="submitForm(event)">
                     <!-- Name -->
                     <div>
-                        <label for="name" class="block text-sm font-bold text-gray-700 mb-1" id="label-name">Tên của bạn</label>
-                        <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition" placeholder="Nhập tên của bạn...">
+                        <label for="name" class="block text-sm font-bold text-gray-700 mb-1" id="label-name">Tên của
+                            bạn</label>
+                        <input type="text" id="name" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition"
+                            placeholder="Nhập tên của bạn...">
                     </div>
 
                     <!-- Phone -->
                     <div>
-                        <label for="phone" class="block text-sm font-bold text-gray-700 mb-1" id="label-phone">Số điện thoại</label>
-                        <input type="tel" id="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition" placeholder="0912...">
+                        <label for="phone" class="block text-sm font-bold text-gray-700 mb-1" id="label-phone">Số điện
+                            thoại</label>
+                        <input type="tel" id="phone" required
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition"
+                            placeholder="0912...">
                     </div>
 
                     <!-- Guests Count -->
                     <div>
-                        <label for="guests" class="block text-sm font-bold text-gray-700 mb-1" id="label-guests">Số lượng người đi cùng</label>
-                        <select id="guests" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition bg-white">
+                        <label for="guests" class="block text-sm font-bold text-gray-700 mb-1" id="label-guests">Số
+                            lượng người đi cùng</label>
+                        <select id="guests"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition bg-white">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -236,14 +345,17 @@
 
                     <!-- Attendance -->
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2" id="label-attending">Bạn sẽ tham dự chứ?</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-2" id="label-attending">Bạn sẽ tham dự
+                            chứ?</label>
                         <div class="flex gap-4">
                             <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="attendance" value="yes" checked class="text-wedding-red focus:ring-wedding-red w-5 h-5">
+                                <input type="radio" name="attendance" value="yes" checked
+                                    class="text-wedding-red focus:ring-wedding-red w-5 h-5">
                                 <span id="opt-yes">Có, chắc chắn rồi!</span>
                             </label>
                             <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="attendance" value="no" class="text-wedding-red focus:ring-wedding-red w-5 h-5">
+                                <input type="radio" name="attendance" value="no"
+                                    class="text-wedding-red focus:ring-wedding-red w-5 h-5">
                                 <span id="opt-no">Rất tiếc, mình bận mất rồi</span>
                             </label>
                         </div>
@@ -251,11 +363,16 @@
 
                     <!-- Message -->
                     <div>
-                        <label for="message" class="block text-sm font-bold text-gray-700 mb-1" id="label-message">Lời nhắn gửi</label>
-                        <textarea id="message" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition" placeholder="Gửi lời chúc đến Cảnh Thành & Đặng Loan..."></textarea>
+                        <label for="message" class="block text-sm font-bold text-gray-700 mb-1" id="label-message">Lời
+                            nhắn gửi</label>
+                        <textarea id="message" rows="3"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-wedding-red focus:ring-2 focus:ring-red-200 outline-none transition"
+                            placeholder="Gửi lời chúc đến Cảnh Thành & Đặng Loan..."></textarea>
                     </div>
 
-                    <button type="submit" class="w-full bg-wedding-red text-white font-bold py-4 rounded-lg hover:bg-red-700 transition transform hover:-translate-y-1 shadow-lg" id="btn-submit">
+                    <button type="submit"
+                        class="w-full bg-wedding-red text-white font-bold py-4 rounded-lg hover:bg-red-700 transition transform hover:-translate-y-1 shadow-lg"
+                        id="btn-submit">
                         GỬI XÁC NHẬN
                     </button>
                 </form>
@@ -278,7 +395,8 @@
             <div class="text-wedding-red text-5xl mb-4"><i class="far fa-check-circle"></i></div>
             <h3 class="text-2xl font-bold mb-2">Thank You!</h3>
             <p class="text-gray-600 mb-6">Thông tin của bạn đã được gửi thành công.</p>
-            <button onclick="document.getElementById('modal').classList.add('hidden')" class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700">Đóng</button>
+            <button onclick="document.getElementById('modal').classList.add('hidden')"
+                class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700">Đóng</button>
         </div>
     </div>
 
@@ -369,6 +487,111 @@
             document.getElementById('modal').classList.add('flex');
             e.target.reset();
         }
+
+        // Music Control
+        const audio = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+        const musicIcon = musicBtn.querySelector('i');
+        let isPlaying = false;
+
+        function updateMusicUI(playing) {
+            if (playing) {
+                musicBtn.classList.add('playing');
+                musicIcon.classList.remove('fa-music');
+                musicIcon.classList.add('fa-compact-disc');
+            } else {
+                musicBtn.classList.remove('playing');
+                musicIcon.classList.remove('fa-compact-disc');
+                musicIcon.classList.add('fa-music');
+            }
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play().then(() => {
+                    isPlaying = true;
+                }).catch(err => {
+                    console.log("Audio play failed: ", err);
+                    alert("Không thể phát nhạc tự động. Vui lòng tương tác với trang web trước.");
+                });
+            }
+            updateMusicUI(isPlaying);
+        });
+
+        // Check if autoplay worked
+        audio.addEventListener('play', () => {
+            isPlaying = true;
+            updateMusicUI(true);
+        });
+        audio.addEventListener('pause', () => {
+            isPlaying = false;
+            updateMusicUI(false);
+        });
+
+        // Try auto-play logic (3s delay or scroll)
+        let hasAutoplayed = false;
+
+        function attemptPlay() {
+            if (hasAutoplayed || isPlaying) return;
+
+            audio.play().then(() => {
+                hasAutoplayed = true;
+                // UI update is handled by the 'play' event listener
+            }).catch(err => {
+                console.log("Autoplay prevented:", err);
+                // If 3s timer failed (browser policy), scroll might still work later
+            });
+        }
+
+        // 1. Play after 3 seconds
+        setTimeout(attemptPlay, 3000);
+
+        // 2. Play on scroll (user interaction usually allows audio)
+        window.addEventListener('scroll', () => {
+            attemptPlay();
+        }, { once: true });
+
+        // 3. Keep existing click fallback
+        document.body.addEventListener('click', () => {
+            attemptPlay();
+        }, { once: true });
+
+
+        // Falling Hearts Effect
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+
+            // Random properties
+            const startLeft = Math.random() * 100; // 0-100%
+            const duration = Math.random() * 3 + 4; // 4-7s
+            const size = Math.random() * 10 + 10; // 10-20px
+            const delay = Math.random() * 5; // 0-5s start delay
+
+            heart.style.left = startLeft + 'vw';
+            heart.style.animationDuration = duration + 's';
+            heart.style.fontSize = size + 'px';
+            heart.style.animationDelay = delay + 's';
+
+            // Randomize color slightly (optional, keeping red/pink theme)
+            const colors = ['#e63946', '#fcd5ce', '#ffcad4'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+            document.body.appendChild(heart);
+
+            // Cleanup
+            setTimeout(() => {
+                heart.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // Create hearts continuously
+        setInterval(createHeart, 300);
     </script>
 </body>
+
 </html>
