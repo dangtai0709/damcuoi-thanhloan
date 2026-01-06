@@ -129,7 +129,7 @@ function createHeart() {
 setInterval(createHeart, 300);
 
 // Music Player
-const musicBtn = document.getElementById('music-btn');
+const musicBtn = document.getElementById('music-toggle');
 const bgMusic = document.getElementById('bg-music');
 let isPlaying = false;
 
@@ -150,24 +150,36 @@ if (musicBtn) {
     musicBtn.addEventListener('click', toggleMusic);
 }
 
-// Auto play logic
+// Auto play logic - Handle browser autoplay restrictions
 function attemptPlay() {
-    if (bgMusic && musicBtn) {
+    if (bgMusic && musicBtn && !isPlaying) {
         bgMusic.play().then(() => {
             isPlaying = true;
             musicBtn.classList.add('animate-spin-slow');
             musicBtn.innerHTML = '<i class="fas fa-compact-disc text-xl"></i>';
+            console.log("Music autoplay started successfully");
         }).catch(e => {
-            console.log("Auto-play prevented");
+            console.log("Auto-play prevented by browser. User interaction required.");
+            isPlaying = false;
         });
     }
 }
 
-setTimeout(attemptPlay, 3000);
+// Try to autoplay when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(attemptPlay, 1000);
+});
 
-window.addEventListener('scroll', function () {
-    if (!isPlaying) attemptPlay();
-}, { once: true });
+// Try autoplay on first user interaction (click, scroll, touch)
+const enableAutoplayOnInteraction = () => {
+    if (!isPlaying) {
+        attemptPlay();
+    }
+};
+
+['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+    window.addEventListener(event, enableAutoplayOnInteraction, { once: true });
+});
 
 // Modal Functions
 // Modal Functions
