@@ -129,45 +129,61 @@ function createHeart() {
 setInterval(createHeart, 300);
 
 // Music Player
-const musicBtn = document.getElementById('music-btn');
+const musicBtn = document.getElementById('music-toggle');
 const bgMusic = document.getElementById('bg-music');
 let isPlaying = false;
 
-function toggleMusic() {
-    if (isPlaying) {
-        bgMusic.pause();
-        musicBtn.classList.remove('animate-spin-slow');
-        musicBtn.innerHTML = '<i class="fas fa-play text-xl"></i>';
-    } else {
-        bgMusic.play();
+function updateMusicUI(playing) {
+    isPlaying = playing;
+    if (playing) {
         musicBtn.classList.add('animate-spin-slow');
         musicBtn.innerHTML = '<i class="fas fa-compact-disc text-xl"></i>';
+    } else {
+        musicBtn.classList.remove('animate-spin-slow');
+        musicBtn.innerHTML = '<i class="fas fa-play text-xl"></i>';
     }
-    isPlaying = !isPlaying;
 }
 
-if (musicBtn) {
-    musicBtn.addEventListener('click', toggleMusic);
+if (bgMusic && musicBtn) {
+    // Event Listeners for UI Sync
+    bgMusic.addEventListener('play', () => updateMusicUI(true));
+    bgMusic.addEventListener('pause', () => updateMusicUI(false));
+
+    musicBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
+        } else {
+            bgMusic.pause();
+        }
+    });
 }
 
 // Auto play logic
+// Auto play logic
 function attemptPlay() {
-    if (bgMusic && musicBtn) {
+    if (bgMusic && bgMusic.paused) {
         bgMusic.play().then(() => {
-            isPlaying = true;
-            musicBtn.classList.add('animate-spin-slow');
-            musicBtn.innerHTML = '<i class="fas fa-compact-disc text-xl"></i>';
+            // Remove listeners once played (UI updated by event)
+            cleanupAutoPlay();
         }).catch(e => {
-            console.log("Auto-play prevented");
+            console.log("Auto-play prevented (waiting for interaction)");
         });
     }
 }
 
+function cleanupAutoPlay() {
+    document.removeEventListener('click', attemptPlay);
+    document.removeEventListener('touchstart', attemptPlay);
+    window.removeEventListener('scroll', attemptPlay);
+}
+
+// Try immediately on load (often blocked, but worth a try)
 setTimeout(attemptPlay, 3000);
 
-window.addEventListener('scroll', function () {
-    if (!isPlaying) attemptPlay();
-}, { once: true });
+// Try on any user interaction
+document.addEventListener('click', attemptPlay, { once: true });
+document.addEventListener('touchstart', attemptPlay, { once: true });
+window.addEventListener('scroll', attemptPlay, { once: true });
 
 // Modal Functions
 // Modal Functions
