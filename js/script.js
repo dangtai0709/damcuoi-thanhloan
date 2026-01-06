@@ -59,7 +59,7 @@ function setLanguage(lang) {
     currentLang = lang;
     // Update Text
     const t = translations[lang];
-    
+
     // Form Elements
     const elements = {
         'form-title': t.title,
@@ -91,12 +91,12 @@ function setLanguage(lang) {
         if (el) el.placeholder = ph;
     }
 
-    // Radio Labels (traversing from input to next span)
+    // Radio Labels
     const radioYes = document.getElementById('opt-yes');
-    if (radioYes && radioYes.nextElementSibling) radioYes.nextElementSibling.textContent = t.yes;
-    
+    if (radioYes) radioYes.textContent = t.yes;
+
     const radioNo = document.getElementById('opt-no');
-    if (radioNo && radioNo.nextElementSibling) radioNo.nextElementSibling.textContent = t.no;
+    if (radioNo) radioNo.textContent = t.no;
 
     // Update Button Styles
     document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -170,12 +170,14 @@ window.addEventListener('scroll', function () {
 }, { once: true });
 
 // Modal Functions
+// Modal Functions
 function closeModal() {
     const modal = document.getElementById('thank-you-modal');
     if (modal) {
         modal.classList.add('opacity-0');
         setTimeout(() => {
             modal.classList.add('hidden');
+            modal.classList.remove('flex'); // Remove flex
             modal.classList.remove('opacity-0');
         }, 300);
     }
@@ -185,6 +187,7 @@ function showModal() {
     const modal = document.getElementById('thank-you-modal');
     if (modal) {
         modal.classList.remove('hidden');
+        modal.classList.add('flex'); // Add flex to enable centering
         modal.classList.remove('opacity-0'); // Ensure it's visible
         // Ensure the text is up to date with current language
         setLanguage(currentLang);
@@ -192,7 +195,7 @@ function showModal() {
 }
 
 // RSVP Form Handling
-const scriptURL = 'https://script.google.com/macros/s/AKfycbx2n0--AIa-66LFaVQMx-r4tjJtn21R_cpEEkN7RBUJAIbnQgCN7kY8_grkgKuLXnSnhw/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbySv3UM0Ey5F9SG1Eyu1VVIorN224GuypV47vZXcBvaGAFbJpYL0MUq1I3kebnfxsD7LQ/exec';
 const form = document.getElementById('wedding-form');
 
 if (form) {
